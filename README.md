@@ -6,8 +6,8 @@
 Using this library you can easily create and sign transactions for VIZ blockchain.
 It also allows you to multi-sign existing transactions or create them without signature at all.
 
-**NOTE:** You cannot broadcast transactions to the blockchain using this library. Only serialization and signature.
-To send transactions to the network, use any http/ws-library
+**NOTE:** You cannot broadcast transactions to the blockchain using this library. Only serialization and signing.
+To send transactions to the network, use any other http/ws-library
 
 ## Example transaction
 
