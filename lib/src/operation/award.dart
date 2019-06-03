@@ -98,10 +98,6 @@ class Award implements BaseOperation, Jsonable<List<Object>> {
     if (beneficiaries == null) {
       beneficiaries = [];
     }
-
-    if (beneficiaries == null) {
-      beneficiaries = [];
-    }
   }
 
   @override

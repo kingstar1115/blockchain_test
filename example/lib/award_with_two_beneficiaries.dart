@@ -15,8 +15,6 @@ void main() {
   award.initiator = AccountName('<INITIATOR_LOGIN>');
   award.receiver = AccountName('<RECEIVER_LOGIN>');
   award.energy = 1000; // 10.00%
-  award.customSequence =
-      Uint64(BigInt.from(1234)); // Just any number, usually zero
   award.memo = Memo('Hello World');
   award.beneficiaries = [
     BeneficiaryRouteType(AccountName('<BENEFICIARY_ONE>'),

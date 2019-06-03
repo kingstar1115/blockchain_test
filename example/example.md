@@ -7,18 +7,16 @@ import 'package:viz_transaction/viz_transaction.dart';
 
 void main() {
   Transaction trx = Transaction(
-      expiration: TimePointSec(DateTime.now().add(Duration(minutes: 30))),
+      expiration: TimePointSec(
+          DateTime.now().add(Duration(minutes: 30))), // now time + 30min
       refBlockNum: 46179,
-      refBlockPrefix: 1490075988); // now time + 30min
+      refBlockPrefix: 1490075988);
 
   Award award = Award(
-      initiator: AccountName('<INITIATOR_LOGIN>'), //<INITIATOR_LOGIN>
-      receiver: AccountName('<RECEIVER_LOGIN>'), //<RECEIVER_LOGIN>
+      initiator: AccountName('<INITIATOR_LOGIN>'),
+      receiver: AccountName('<RECEIVER_LOGIN>'),
       energy: 1000, // 10.00%
-      customSequence:
-          Uint64(BigInt.from(1234)), // Just any number, usually zero
-      memo: Memo('Hello World'),
-      beneficiaries: []);
+      memo: Memo('Hello World'));
 
   trx.operations.add(award);
   trx.sign(['<REGULAR_PRIVATE_KEY>']); //Sign transaction
@@ -43,8 +41,6 @@ void main() {
   award.initiator = AccountName('<INITIATOR_LOGIN>');
   award.receiver = AccountName('<RECEIVER_LOGIN>');
   award.energy = 1000; // 10.00%
-  award.customSequence =
-      Uint64(BigInt.from(1234)); // Just any number, usually zero
   award.memo = Memo('Hello World');
   award.beneficiaries = [
     BeneficiaryRouteType(AccountName('<BENEFICIARY_ONE>'),
