@@ -1,8 +1,9 @@
 # viz-transaction
 
 ![GitHub](https://img.shields.io/github/license/VizTower/viz-transaction.svg)
+[![Build Status](https://travis-ci.com/VizTower/viz-transaction.svg?branch=master)](https://travis-ci.com/VizTower/viz-transaction)
 
-Using this library you can easily create and sign transactions for Waves blockchain.
+Using this library you can easily create and sign transactions for VIZ blockchain.
 It also allows you to multi-sign existing transactions or create them without signature at all.
 
 ## Example transaction
