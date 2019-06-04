@@ -1,14 +1,38 @@
-## Example transaction
+## Example transfer
 
-Creates and signs a transaction with an ``award`` operation and without beneficiaries.
+Signing ``transfer`` operations with viz-transaction is very simple:
+
+```dart
+import 'package:viz_transaction/viz_transaction.dart';
+
+void main() {
+  Transaction trx = Transaction();
+  trx.refBlockNum = 46179;
+  trx.refBlockPrefix = 1490075988;
+
+  Transfer transfer = Transfer(
+      from: AccountName('<SENDER_LOGIN>'),
+      to: AccountName('<RECEIVER_LOGIN>'),
+      amount: VizAsset(1000), // 1 VIZ
+      memo: Memo('Hello world!'));
+
+  trx.operations.add(transfer);
+  trx.sign(['<ACTIVE_PRIVATE_KEY>']); //Sign transaction
+
+  // And get a json string to broadcast in blockchain
+  print(trx.toJson());
+}
+```
+
+## Example award
+
+What about creating and signing a transaction with an ``award`` operation? Let's do it without beneficiaries.
 
 ```dart
 import 'package:viz_transaction/viz_transaction.dart';
 
 void main() {
   Transaction trx = Transaction(
-      expiration: TimePointSec(
-          DateTime.now().add(Duration(minutes: 30))), // now time + 30min
       refBlockNum: 46179,
       refBlockPrefix: 1490075988);
 
@@ -31,13 +55,11 @@ And now let's do the same but with two beneficiaries.
 import 'package:viz_transaction/viz_transaction.dart';
 
 void main() {
-  Transaction trx = Transaction.empty();
-  trx.expiration = TimePointSec(
-      DateTime.now().add(Duration(minutes: 30))); // now time + 30min
+  Transaction trx = Transaction();
   trx.refBlockNum = 46179;
   trx.refBlockPrefix = 1490075988;
 
-  Award award = Award.empty();
+  Award award = Award();
   award.initiator = AccountName('<INITIATOR_LOGIN>');
   award.receiver = AccountName('<RECEIVER_LOGIN>');
   award.energy = 1000; // 10.00%
@@ -57,7 +79,7 @@ void main() {
 }
 ```
 
-As you can see, an empty constructor was used for "award" operation, and then values were set. Just because it is possible.
+As you may have noticed, an empty constructor was used for "award" operation, and then values were set. Just because it is possible.
 
 ## Example gets ref block num and prefix
 

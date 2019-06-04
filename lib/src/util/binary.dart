@@ -33,7 +33,18 @@ class BinaryUtils {
     }
   }
 
-  ///Transforms an int16 value to bytes.
+  ///Transforms an int8(byte) value to bytes.
+  ///Value must be in range -128 to 127.
+  static Uint8List transformInt8ToBytes(int value) {
+    _checkOutOfBoundsInt(value, 'int8', -128, 127);
+
+    ByteDataWriter writer = ByteDataWriter();
+    writer.writeInt8(value);
+
+    return writer.toBytes();
+  }
+
+  ///Transforms an int16(short) value to bytes.
   ///Value must be in range -32768 to 32767.
   static Uint8List transformInt16ToBytes(int value,
       [Endian endian = Endian.little]) {
@@ -45,7 +56,7 @@ class BinaryUtils {
     return writer.toBytes();
   }
 
-  ///Transforms an int32 value to bytes.
+  ///Transforms an int32(int) value to bytes.
   ///Value must be in range -2147483648 to 2147483647.
   static Uint8List transformInt32ToBytes(int value,
       [Endian endian = Endian.little]) {
@@ -57,7 +68,7 @@ class BinaryUtils {
     return writer.toBytes();
   }
 
-  ///Transforms an int64 value to bytes.
+  ///Transforms an int64(long) value to bytes.
   ///Value must be in range -9223372036854775808 to 9223372036854775807.
   static Uint8List transformInt64ToBytes(int value,
       [Endian endian = Endian.little]) {

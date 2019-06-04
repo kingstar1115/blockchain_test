@@ -31,10 +31,6 @@ class Transaction extends BaseType {
     _fillNullOptionalsFields();
   }
 
-  Transaction.empty() {
-    _fillNullOptionalsFields();
-  }
-
   @override
   Uint8List toBytes() {
     validate();
@@ -113,9 +109,7 @@ class Transaction extends BaseType {
 
   void _fillNullOptionalsFields() {
     if (expiration == null) {
-      int oneHour = 1 * 60 * 60 * 1000;
-      int exp = DateTime.now().millisecondsSinceEpoch + oneHour;
-      expiration = TimePointSec(DateTime.fromMillisecondsSinceEpoch(exp));
+      expiration = TimePointSec(DateTime.now().add(Duration(minutes: 30)));
     }
 
     if (operations == null) {

@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import '../types.dart' show BaseType;
-import '../utils.dart';
+import 'base_type.dart';
+import '../utils.dart' show BinaryUtils;
 
 class TimePointSec extends BaseType {
   int _dateSec;

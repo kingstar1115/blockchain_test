@@ -5,7 +5,7 @@ import 'package:buffer/buffer.dart';
 import '../exceptions.dart';
 import '../json.dart';
 import '../types.dart' show AccountName, Uint64, Memo, BeneficiaryRouteType;
-import '../utils.dart';
+import '../utils.dart' show BinaryUtils;
 import 'base_operatin.dart';
 
 class Award implements BaseOperation, Jsonable<List<Object>> {
@@ -27,10 +27,6 @@ class Award implements BaseOperation, Jsonable<List<Object>> {
       this.customSequence,
       this.memo,
       this.beneficiaries}) {
-    _fillNullOptionalsFields();
-  }
-
-  Award.empty() {
     _fillNullOptionalsFields();
   }
 

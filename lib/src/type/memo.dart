@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import '../exceptions.dart';
-import '../utils.dart';
+import '../utils.dart' show BinaryUtils;
 import 'base_type.dart';
 
 class Memo extends BaseType {

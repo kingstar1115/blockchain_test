@@ -1,11 +1,7 @@
 import 'package:viz_transaction/viz_transaction.dart';
 
 void main() {
-  Transaction trx = Transaction(
-      expiration: TimePointSec(
-          DateTime.now().add(Duration(minutes: 30))), // now time + 30min
-      refBlockNum: 46179,
-      refBlockPrefix: 1490075988);
+  Transaction trx = Transaction(refBlockNum: 46179, refBlockPrefix: 1490075988);
 
   Award award = Award(
       initiator: AccountName('<INITIATOR_LOGIN>'),

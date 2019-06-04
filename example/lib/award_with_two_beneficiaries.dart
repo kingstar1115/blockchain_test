@@ -5,13 +5,11 @@
 import 'package:viz_transaction/viz_transaction.dart';
 
 void main() {
-  Transaction trx = Transaction.empty();
-  trx.expiration = TimePointSec(
-      DateTime.now().add(Duration(minutes: 30))); // now time + 30min
+  Transaction trx = Transaction();
   trx.refBlockNum = 46179;
   trx.refBlockPrefix = 1490075988;
 
-  Award award = Award.empty();
+  Award award = Award();
   award.initiator = AccountName('<INITIATOR_LOGIN>');
   award.receiver = AccountName('<RECEIVER_LOGIN>');
   award.energy = 1000; // 10.00%
