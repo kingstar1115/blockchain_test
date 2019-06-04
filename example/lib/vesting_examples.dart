@@ -13,8 +13,7 @@ void withdrawVestingExample() {
 
   WithdrawVesting withdraw = WithdrawVesting(
       account: AccountName('<ACCOUNT_NAME>'),
-      amount: SharesAsset(1000000) // 1 SHARES
-      );
+      amount: SharesAsset.fromString('540.000000 SHARES'));
 
   trx.operations.add(withdraw);
   trx.sign(['<ACTIVE_PRIVATE_KEY>']); //Sign transaction
@@ -47,7 +46,7 @@ void delegateVestingSharesExample() {
   DelegateVestingShares delegateVestingShares = DelegateVestingShares(
       delegator: AccountName('<SENDER_LOGIN>'),
       delegatee: AccountName('<RECEIVER_LOGIN>'),
-      amount: SharesAsset(540000000) // 540 Shares
+      amount: SharesAsset(540000000) // another way to set 540 Shares
       );
 
   trx.operations.add(delegateVestingShares);

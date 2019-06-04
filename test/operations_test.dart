@@ -39,21 +39,16 @@ void main() {
           to: AccountName('alex'),
           amount: VizAsset(523000) // 523 VIZ
           );
-      expect(
-          hex.encode(transfer.toBytes()),
-          equals(
-              '0303626f6204616c6578f8fa0700000000000356495a00000000'));
+      expect(hex.encode(transfer.toBytes()),
+          equals('0303626f6204616c6578f8fa0700000000000356495a00000000'));
     });
 
     test("Testing WithdrawVesting operation.", () {
       WithdrawVesting withdraw = WithdrawVesting(
-          account: AccountName('bob'),
-          amount: SharesAsset(1000000) // 1 SHARES
-      );
-      expect(
-          hex.encode(withdraw.toBytes()),
-          equals(
-              '0403626f6240420f00000000000653484152455300'));
+          account: AccountName('bob'), amount: SharesAsset(1000000) // 1 SHARES
+          );
+      expect(hex.encode(withdraw.toBytes()),
+          equals('0403626f6240420f00000000000653484152455300'));
     });
 
     test("Testing SetWithdrawVestingRoute operation.", () {
@@ -61,12 +56,9 @@ void main() {
           from: AccountName('bob'),
           to: AccountName('alex'),
           percent: 1000, // 10%
-          autoVest: true
-      );
-      expect(
-          hex.encode(vestingRoute.toBytes()),
-          equals(
-              '0b03626f6204616c6578e80301'));
+          autoVest: true);
+      expect(hex.encode(vestingRoute.toBytes()),
+          equals('0b03626f6204616c6578e80301'));
     });
 
     test("Testing DelegateVestingShares operation.", () {
@@ -74,11 +66,9 @@ void main() {
           delegator: AccountName('bob'),
           delegatee: AccountName('alex'),
           amount: SharesAsset(540000000) // 540 Shares
-      );
-      expect(
-          hex.encode(delegateVestingShares.toBytes()),
-          equals(
-              '1303626f6204616c657800bf2f20000000000653484152455300'));
+          );
+      expect(hex.encode(delegateVestingShares.toBytes()),
+          equals('1303626f6204616c657800bf2f20000000000653484152455300'));
     });
   });
 }

@@ -13,7 +13,7 @@ void main() {
   Transfer transfer = Transfer(
       from: AccountName('<SENDER_LOGIN>'),
       to: AccountName('<RECEIVER_LOGIN>'),
-      amount: VizAsset(1000), // 1 VIZ
+      amount: VizAsset.fromString('1.000 VIZ'),
       memo: Memo('Hello world!'));
 
   trx.operations.add(transfer);
@@ -105,7 +105,7 @@ void main() {
 
   WithdrawVesting withdraw = WithdrawVesting(
       account: AccountName('<ACCOUNT_NAME>'),
-      amount: SharesAsset(1000000) // 1 SHARES
+      amount: SharesAsset.fromString('1.000000 SHARES')
       );
 
   trx.operations.add(withdraw);

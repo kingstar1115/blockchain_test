@@ -67,7 +67,6 @@ class Transfer implements BaseOperation, Jsonable<List<Object>> {
 }
 
 class TransferToVesting implements BaseOperation, Jsonable<List<Object>> {
-
   AccountName from;
   AccountName to;
   VizAsset amount;
@@ -83,7 +82,8 @@ class TransferToVesting implements BaseOperation, Jsonable<List<Object>> {
     writer.write(BinaryUtils.transformInt32ToVarIntBytes(ID));
     writer.write(from.toBytes());
     writer.write(to.toBytes());
-    writer.write(amount.toBytes());;
+    writer.write(amount.toBytes());
+    ;
     return writer.toBytes();
   }
 

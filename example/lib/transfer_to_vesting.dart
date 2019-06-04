@@ -5,12 +5,10 @@ void main() {
   trx.refBlockNum = 46179;
   trx.refBlockPrefix = 1490075988;
 
-
   TransferToVesting transfer = TransferToVesting(
       from: AccountName('<SENDER_LOGIN>'),
       to: AccountName('<RECEIVER_LOGIN>'),
-      amount: VizAsset(523000) // 523 VIZ
-  );
+      amount: VizAsset.fromString('523.000 VIZ'));
 
   trx.operations.add(transfer);
   trx.sign(['<ACTIVE_PRIVATE_KEY>']); //Sign transaction

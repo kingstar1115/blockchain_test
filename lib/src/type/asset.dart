@@ -9,20 +9,33 @@ import 'base_type.dart';
 
 enum AssetSymbol { VIZ, SHARES }
 
-class Asset implements BaseType {
+abstract class Asset implements BaseType {
   ///Original type is int64
   int amount;
 
   ///Original type  uint64
-  AssetSymbol _symbol;
-  int _decimals;
+  AssetSymbol get symbol;
+  int get decimals;
 
-  AssetSymbol get symbol => _symbol;
-  int get decimals => _decimals;
+  Asset(this.amount);
 
-  Asset(this.amount, AssetSymbol symbol, int decimals) {
-    this._symbol = symbol;
-    this._decimals = decimals;
+  /// Creates [Asset] from a string like 16.000 VIZ.
+  /// A ``value`` must be in the format ``INTEGER.DECIMAL SYMBOL_NAME``.
+  /// Fore example 20 VIZ must be ``20.000 VIZ`` or 50 SHARES must be ``50.000000 SHARES``.
+  Asset.fromString(String value) {
+    value = value.trim().toUpperCase();
+    String symbolName = symbol.toString().split('.').last.toUpperCase();
+
+    RegExp regExp = RegExp('^-?[0-9]+\\.[0-9]{$decimals} $symbolName\$');
+
+    if (regExp.hasMatch(value)) {
+      String amountStr = value.split(' ')[0].split('.').join();
+      amount = int.tryParse(amountStr);
+    } else {
+      throw FormatException(
+          'Invalid value = $value: The string format of the asset must consist of $decimals decimal places '
+          'and at least one before the comma and "$symbolName" after space.');
+    }
   }
 
   @override
@@ -65,19 +78,31 @@ class Asset implements BaseType {
 }
 
 class VizAsset extends Asset {
+  @override
+  AssetSymbol get symbol => AssetSymbol.VIZ;
+  @override
+  int get decimals => 3;
+
   ///1 = 0.001 VIZ
   ///10 = 0.01 VIZ
   ///100 = 0.1 VIZ
   ///1 000 = 1 VIZ
   ///10 000 = 10 VIZ
   ///100 000 = 100 VIZ
-  VizAsset(int amount) : super(amount, AssetSymbol.VIZ, 3);
+  VizAsset(int amount) : super(amount);
+  VizAsset.fromString(String value) : super.fromString(value);
 }
 
 class SharesAsset extends Asset {
+  @override
+  AssetSymbol get symbol => AssetSymbol.SHARES;
+  @override
+  int get decimals => 6;
+
   ///1 = 0.000001 SHARES
   ///1 000 000 = 1 SHARES
   ///10 000 000 = 10 SHARES
   ///100 000 000 = 100 SHARES
-  SharesAsset(int amount) : super(amount, AssetSymbol.SHARES, 6);
+  SharesAsset(int amount) : super(amount);
+  SharesAsset.fromString(String value) : super.fromString(value);
 }

@@ -8,7 +8,7 @@ void main() {
   Transfer transfer = Transfer(
       from: AccountName('<SENDER_LOGIN>'),
       to: AccountName('<RECEIVER_LOGIN>'),
-      amount: VizAsset(1000), // 1 VIZ
+      amount: VizAsset.fromString('1.000 VIZ'),
       memo: Memo('Hello world!'));
 
   trx.operations.add(transfer);
