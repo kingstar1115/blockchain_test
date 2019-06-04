@@ -93,4 +93,27 @@ int refBlockNum = BlockchainUtils.getRefBlockNum(7097393);
 int refBlockPrefix = BlockchainUtils.getRefBlockPrefix("006c4c314a0c19918caa3187abdebfeeb56724b1");
 ```
 
+## Example withdraw vesting operation
+
+```dart
+import 'package:viz_transaction/viz_transaction.dart';
+
+void main() {
+  Transaction trx = Transaction();
+  trx.refBlockNum = 46179;
+  trx.refBlockPrefix = 1490075988;
+
+  WithdrawVesting withdraw = WithdrawVesting(
+      account: AccountName('<ACCOUNT_NAME>'),
+      amount: SharesAsset(1000000) // 1 SHARES
+      );
+
+  trx.operations.add(withdraw);
+  trx.sign(['<ACTIVE_PRIVATE_KEY>']); //Sign transaction
+
+  // And get a json string to broadcast in blockchain
+  print(trx.toJson());
+}
+```
+
 See more examples in the ``example/lib`` folder.

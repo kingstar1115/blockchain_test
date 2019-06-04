@@ -65,3 +65,50 @@ class Transfer implements BaseOperation, Jsonable<List<Object>> {
     }
   }
 }
+
+class TransferToVesting implements BaseOperation, Jsonable<List<Object>> {
+
+  AccountName from;
+  AccountName to;
+  VizAsset amount;
+
+  static int get ID => 3;
+
+  TransferToVesting({this.from, this.to, this.amount});
+
+  @override
+  Uint8List toBytes() {
+    validate();
+    ByteDataWriter writer = ByteDataWriter();
+    writer.write(BinaryUtils.transformInt32ToVarIntBytes(ID));
+    writer.write(from.toBytes());
+    writer.write(to.toBytes());
+    writer.write(amount.toBytes());;
+    return writer.toBytes();
+  }
+
+  @override
+  List<Object> toJsonableObject() {
+    Map<String, Object> params = {
+      'from': from.toString(),
+      'to': to.toString(),
+      'amount': amount.toString()
+    };
+
+    List<Object> operation = ['transfer_to_vesting'];
+    operation.add(params);
+
+    return operation;
+  }
+
+  @override
+  void validate() {
+    _checkNulls();
+  }
+
+  void _checkNulls() {
+    InvalidParameterException.checkNotNull(from, 'from');
+    InvalidParameterException.checkNotNull(to, 'to');
+    InvalidParameterException.checkNotNull(amount, 'amount');
+  }
+}
