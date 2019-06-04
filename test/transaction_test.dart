@@ -57,7 +57,7 @@ void main() {
           memo: Memo('Hello Dear World!'),
           beneficiaries: [
             BeneficiaryRouteType(AccountName('folor'), 3200),
-            BeneficiaryRouteType(AccountName('roi'), 5800)
+            BeneficiaryRouteType(AccountName('roti'), 5800)
           ]);
 
       trx.operations.add(awardOp1);
