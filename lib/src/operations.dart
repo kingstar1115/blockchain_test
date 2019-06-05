@@ -1,3 +1,4 @@
 export 'operation/award.dart';
-export 'operation/transfer.dart';
-export 'operation/vesting.dart';
+export 'operation/subscriptions.dart';
+export 'operation/transfers.dart';
+export 'operation/vestings.dart';

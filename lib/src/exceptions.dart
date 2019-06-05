@@ -24,15 +24,3 @@ class InvalidParameterException implements Exception {
     return res;
   }
 }
-
-class CryptoException implements Exception {
-  final String message;
-  final Object value;
-
-  CryptoException(this.value, this.message);
-
-  @override
-  String toString() {
-    return '$message: $value';
-  }
-}
