@@ -79,8 +79,10 @@ void main() {
           period: 30,
           url: Url('https://example.com'));
 
-      expect(hex.encode(setPaidSubscription.toBytes()),
-          equals('3204616c65781368747470733a2f2f6578616d706c652e636f6d0a00400d0300000000000356495a000000001e00'));
+      expect(
+          hex.encode(setPaidSubscription.toBytes()),
+          equals(
+              '3204616c65781368747470733a2f2f6578616d706c652e636f6d0a00400d0300000000000356495a000000001e00'));
     });
 
     test("Testing PaidSubscription operation.", () {
@@ -90,14 +92,12 @@ void main() {
           amount: VizAsset.fromString('100.000 VIZ'),
           level: 5,
           period: 10,
-          autoRenewal: true
-      );
+          autoRenewal: true);
 
-      expect(hex.encode(paidSubscription.toBytes()),
-          equals('3303626f6204616c65780500a0860100000000000356495a000000000a0001'));
+      expect(
+          hex.encode(paidSubscription.toBytes()),
+          equals(
+              '3303626f6204616c65780500a0860100000000000356495a000000000a0001'));
     });
-
   });
-
-
 }

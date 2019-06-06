@@ -28,13 +28,12 @@ void paidSubscriptionExample() {
   Transaction trx = Transaction(refBlockNum: 46179, refBlockPrefix: 1490075988);
 
   PaidSubscription paidSubscription = PaidSubscription(
-    account: AccountName('<LOGIN_NAME>'),
-    subscriber: AccountName('<LOGIN_NAME>'),
-    amount: VizAsset.fromString('100.000 VIZ'),
-    level: 5,
-    period: 10,
-    autoRenewal: true
-  );
+      account: AccountName('<LOGIN_NAME>'),
+      subscriber: AccountName('<LOGIN_NAME>'),
+      amount: VizAsset.fromString('100.000 VIZ'),
+      level: 5,
+      period: 10,
+      autoRenewal: true);
 
   trx.operations.add(paidSubscription);
   trx.sign(['<ACTIVE_PRIVATE_KEY>']); //Sign transaction
