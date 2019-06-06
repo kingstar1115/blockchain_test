@@ -1,5 +1,6 @@
 import 'package:convert/convert.dart';
 import "package:test/test.dart";
+import 'package:viz_dart_ecc/viz_dart_ecc.dart';
 import 'package:viz_transaction/viz_transaction.dart';
 
 void main() {
@@ -98,6 +99,46 @@ void main() {
           hex.encode(paidSubscription.toBytes()),
           equals(
               '3303626f6204616c65780500a0860100000000000356495a000000000a0001'));
+    });
+
+    test("Testing CreateInvite operation.", () {
+      CreateInvite createInvite = CreateInvite(
+          creator: AccountName('bob'),
+          balance: VizAsset.fromString('2345.000 VIZ'),
+          inviteKeyPubKey: VIZPublicKey.fromString(
+              'VIZ88WzAwBeg9ZqEe3ykJKhnSVjpZU75KcNNbWZji6tFddiP5rtwX'));
+
+      expect(
+          hex.encode(createInvite.toBytes()),
+          equals(
+              '2b03626f6228c82300000000000356495a0000000003aaf0e06546cebf14c31014ddea4e308fbcc4a9d40344ec352e9c2263cb6ade55'));
+    });
+
+    test("Testing CreateInvite operation.", () {
+      ClaimInviteBalance inviteRegistration = ClaimInviteBalance(
+          receiver: AccountName('alex'),
+          initiator: AccountName('bob'),
+          secret: VIZPrivateKey.fromString(
+              '5KUEWR4TcKw6KP35cZ1DiGQH5ADf5CTM7WH8jPGaGwbkQCLWbWz'));
+
+      expect(
+          hex.encode(inviteRegistration.toBytes()),
+          equals(
+              '2c03626f6204616c657833354b554557523454634b77364b503335635a314469475148354144663543544d375748386a5047614777626b51434c5762577a'));
+    });
+
+    test("Testing CreateInvite operation.", () {
+      InviteRegistration inviteRegistration = InviteRegistration(
+          initiator: AccountName('bob'),
+          newAccount: AccountName('alex'),
+          newAccountPubKey: VIZPublicKey.fromString(
+              'VIZ8P3WuejwhAyHdjdHb2BgBcmr9ecUSNkSM3wym3dK8mNCCmtqYu'),
+          secret: VIZPrivateKey.fromString(
+              '5KN1P2GmJbMXQEKKq7sQoxBSkKMBvibjPXoXm17PG8snQVmjuPr'));
+      expect(
+          hex.encode(inviteRegistration.toBytes()),
+          equals(
+              '2d03626f6204616c657833354b4e315032476d4a624d5851454b4b713773516f7842536b4b4d427669626a50586f586d3137504738736e51566d6a75507203cbecc28163b484510c35d00c014e384f4b679686379a5d51e1f29d483e2f4d45'));
     });
   });
 }
