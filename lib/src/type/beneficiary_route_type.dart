@@ -37,6 +37,8 @@ class BeneficiaryRouteType extends BaseType
   }
 
   @override
-  Map<String, Object> toJsonableObject() =>
-      {"account": account.toString(), "weight": weight};
+  Map<String, Object> toJsonableObject() {
+    validate();
+    return {"account": account.toString(), "weight": weight};
+  }
 }

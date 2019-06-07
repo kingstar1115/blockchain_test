@@ -18,7 +18,7 @@ class Award implements BaseOperation, Jsonable<List<Object>> {
   Memo memo;
   List<BeneficiaryRouteType> beneficiaries;
 
-  static int get ID => 47;
+  static const ID = 47;
 
   Award(
       {this.initiator,
@@ -98,6 +98,7 @@ class Award implements BaseOperation, Jsonable<List<Object>> {
 
   @override
   List<Object> toJsonableObject() {
+    validate();
     List<Object> beneficiaries = [];
 
     for (BeneficiaryRouteType beneficiary in this.beneficiaries) {

@@ -78,7 +78,7 @@ void main() {
           amount: VizAsset.fromString('200.000 VIZ'),
           levels: 10,
           period: 30,
-          url: Url('https://example.com'));
+          url: MemoUrl('https://example.com'));
 
       expect(
           hex.encode(setPaidSubscription.toBytes()),
@@ -114,7 +114,7 @@ void main() {
               '2b03626f6228c82300000000000356495a0000000003aaf0e06546cebf14c31014ddea4e308fbcc4a9d40344ec352e9c2263cb6ade55'));
     });
 
-    test("Testing CreateInvite operation.", () {
+    test("Testing ClaimInviteBalance operation.", () {
       ClaimInviteBalance inviteRegistration = ClaimInviteBalance(
           receiver: AccountName('alex'),
           initiator: AccountName('bob'),
@@ -127,7 +127,7 @@ void main() {
               '2c03626f6204616c657833354b554557523454634b77364b503335635a314469475148354144663543544d375748386a5047614777626b51434c5762577a'));
     });
 
-    test("Testing CreateInvite operation.", () {
+    test("Testing InviteRegistration operation.", () {
       InviteRegistration inviteRegistration = InviteRegistration(
           initiator: AccountName('bob'),
           newAccount: AccountName('alex'),
@@ -139,6 +139,34 @@ void main() {
           hex.encode(inviteRegistration.toBytes()),
           equals(
               '2d03626f6204616c657833354b4e315032476d4a624d5851454b4b713773516f7842536b4b4d427669626a50586f586d3137504738736e51566d6a75507203cbecc28163b484510c35d00c014e384f4b679686379a5d51e1f29d483e2f4d45'));
+    });
+
+    test("Testing CommitteeWorkerCreateRequest operation.", () {
+      CommitteeWorkerCreateRequest committeeCreateRequest =
+          CommitteeWorkerCreateRequest(
+              creator: AccountName('bob'),
+              worker: AccountName('alex'),
+              maxRequiredAmount: VizAsset.fromString('1000000.000 VIZ'),
+              url: MiniUrl('https://example.com'),
+              duration: 5);
+      expect(
+          hex.encode(committeeCreateRequest.toBytes()),
+          equals(
+              '2303626f621368747470733a2f2f6578616d706c652e636f6d04616c657800000000000000000356495a0000000000ca9a3b000000000356495a0000000080970600'));
+    });
+
+    test("Testing CommitteeWorkerCancelRequest operation.", () {
+      CommitteeWorkerCancelRequest cancelRequest = CommitteeWorkerCancelRequest(
+          creator: AccountName('bob'), requestId: 123);
+
+      expect(hex.encode(cancelRequest.toBytes()), equals('2403626f627b000000'));
+    });
+
+    test("Testing CommitteeVoteRequest operation.", () {
+      CommitteeVoteRequest voteRequest = CommitteeVoteRequest(
+          voter: AccountName('alex'), votePercent: -234, requestId: 9678);
+
+      expect(hex.encode(voteRequest.toBytes()), equals('2504616c6578ce25000016ff'));
     });
   });
 }

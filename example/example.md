@@ -20,7 +20,7 @@ void main() {
   trx.sign(['<ACTIVE_PRIVATE_KEY>']); //Sign transaction
 
   // And get a json string to broadcast in blockchain
-  print(trx.toJson());
+  print(trx.toJsonString());
 }
 ```
 
@@ -45,7 +45,7 @@ void main() {
   trx.operations.add(award);
   trx.sign(['<REGULAR_PRIVATE_KEY>']); //Sign transaction
 
-  print(trx.toJson()); // And get a json string to broadcast in blockchain
+  print(trx.toJsonString()); // And get a json string to broadcast in blockchain
 }
 ```
 
@@ -75,7 +75,7 @@ void main() {
   trx.sign(['<REGULAR_PRIVATE_KEY>']); //Sign transaction
 
   // And get a json string to broadcast in blockchain
-  print(trx.toJson());
+  print(trx.toJsonString());
 }
 ```
 
@@ -112,7 +112,7 @@ void main() {
   trx.sign(['<ACTIVE_PRIVATE_KEY>']); //Sign transaction
 
   // And get a json string to broadcast in blockchain
-  print(trx.toJson());
+  print(trx.toJsonString());
 }
 ```
 

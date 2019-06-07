@@ -12,5 +12,5 @@ void main() {
   trx.operations.add(award);
   trx.sign(['<REGULAR_PRIVATE_KEY>']); //Sign transaction
 
-  print(trx.toJson()); // And get a json string to broadcast in blockchain
+  print(trx.toJsonString()); // And get a json string to broadcast in blockchain
 }

@@ -33,7 +33,7 @@ abstract class LimitedString extends BaseType {
           value.length,
           '$strName.length',
           'The $strName is too long. '
-              'Only 1024 characters are allowed.');
+              'Only $_max_length characters are allowed.');
     }
   }
 
@@ -50,11 +50,20 @@ class Memo extends LimitedString {
   String get strName => 'memo';
 }
 
-class Url extends Memo {
-  Url(String url) : super(url);
+class MemoUrl extends Memo {
+  MemoUrl(String url) : super(url);
 
   @override
-  String get strName => 'url';
+  String get strName => 'MemoUrl';
+}
+
+class MiniUrl extends LimitedString {
+  static const MAX_LENGTH = 128;
+
+  MiniUrl(String url) : super(url, MAX_LENGTH);
+
+  @override
+  String get strName => 'MiniUrl';
 }
 
 class CustomId extends LimitedString {

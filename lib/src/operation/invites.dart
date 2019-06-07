@@ -14,7 +14,7 @@ class CreateInvite implements BaseOperation, Jsonable<List<Object>> {
   VizAsset balance;
   VIZPublicKey inviteKeyPubKey;
 
-  static int get ID => 43;
+  static const ID = 43;
 
   CreateInvite({this.creator, this.balance, this.inviteKeyPubKey});
 
@@ -47,6 +47,7 @@ class CreateInvite implements BaseOperation, Jsonable<List<Object>> {
 
   @override
   List<Object> toJsonableObject() {
+    validate();
     Map<String, Object> params = {
       'creator': creator.toString(),
       'balance': balance.toString(),
@@ -65,7 +66,7 @@ class ClaimInviteBalance implements BaseOperation, Jsonable<List<Object>> {
   AccountName receiver;
   VIZPrivateKey secret;
 
-  static int get ID => 44;
+  static const ID = 44;
 
   ClaimInviteBalance({this.initiator, this.receiver, this.secret});
 
@@ -93,6 +94,7 @@ class ClaimInviteBalance implements BaseOperation, Jsonable<List<Object>> {
 
   @override
   List<Object> toJsonableObject() {
+    validate();
     Map<String, Object> params = {
       'initiator': initiator.toString(),
       'receiver': receiver.toString(),
@@ -112,7 +114,7 @@ class InviteRegistration implements BaseOperation, Jsonable<List<Object>> {
   VIZPublicKey newAccountPubKey;
   VIZPrivateKey secret;
 
-  static int get ID => 45;
+  static const ID = 45;
 
   InviteRegistration(
       {this.initiator, this.newAccount, this.newAccountPubKey, this.secret});
@@ -144,6 +146,7 @@ class InviteRegistration implements BaseOperation, Jsonable<List<Object>> {
 
   @override
   List<Object> toJsonableObject() {
+    validate();
     Map<String, Object> params = {
       'initiator': initiator.toString(),
       'new_account_name': newAccount.toString(),

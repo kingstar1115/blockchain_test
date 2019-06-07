@@ -65,9 +65,19 @@ abstract class Asset implements BaseType {
   String toString() {
     String assetName = symbol.toString().split('.').last.toUpperCase();
     String amountStr = amount.toString();
+
+    if (amountStr.length <= decimals) {
+      amountStr = _padAmountStr(amountStr);
+    }
+
     String decimalsStr = amountStr.substring(amountStr.length - decimals);
     amountStr = amountStr.substring(0, amountStr.length - decimals);
     return '$amountStr.$decimalsStr $assetName';
+  }
+
+  String _padAmountStr(String amountStr) {
+    amountStr = amountStr.padLeft(decimals + 1, '0');
+    return amountStr;
   }
 
   void _checkNulls() {

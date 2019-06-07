@@ -14,7 +14,7 @@ class Transfer implements BaseOperation, Jsonable<List<Object>> {
   VizAsset amount;
   Memo memo;
 
-  static int get ID => 2;
+  static const ID = 2;
 
   Transfer({this.from, this.to, this.amount, this.memo}) {
     _fillOptionFields();
@@ -40,6 +40,7 @@ class Transfer implements BaseOperation, Jsonable<List<Object>> {
 
   @override
   List<Object> toJsonableObject() {
+    validate();
     Map<String, Object> params = {
       'from': from.toString(),
       'to': to.toString(),
@@ -71,7 +72,7 @@ class TransferToVesting implements BaseOperation, Jsonable<List<Object>> {
   AccountName to;
   VizAsset amount;
 
-  static int get ID => 3;
+  static const ID = 3;
 
   TransferToVesting({this.from, this.to, this.amount});
 
@@ -89,6 +90,7 @@ class TransferToVesting implements BaseOperation, Jsonable<List<Object>> {
 
   @override
   List<Object> toJsonableObject() {
+    validate();
     Map<String, Object> params = {
       'from': from.toString(),
       'to': to.toString(),

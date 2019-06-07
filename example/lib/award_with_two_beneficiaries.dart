@@ -25,5 +25,5 @@ void main() {
   trx.sign(['<REGULAR_PRIVATE_KEY>']); //Sign transaction
 
   // And get a json string to broadcast in blockchain
-  print(trx.toJson());
+  print(trx.toJsonString());
 }

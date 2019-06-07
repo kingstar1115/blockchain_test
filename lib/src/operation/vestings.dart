@@ -12,7 +12,7 @@ class WithdrawVesting implements BaseOperation, Jsonable<List<Object>> {
   AccountName account;
   SharesAsset amount;
 
-  static int get ID => 4;
+  static const ID = 4;
 
   WithdrawVesting({this.account, this.amount});
 
@@ -28,6 +28,7 @@ class WithdrawVesting implements BaseOperation, Jsonable<List<Object>> {
 
   @override
   List<Object> toJsonableObject() {
+    validate();
     Map<String, Object> params = {
       'account': account.toString(),
       'vesting_shares': amount.toString()
@@ -58,7 +59,7 @@ class SetWithdrawVestingRoute implements BaseOperation, Jsonable<List<Object>> {
   int percent;
   bool autoVest;
 
-  static int get ID => 11;
+  static const ID = 11;
 
   SetWithdrawVestingRoute({this.from, this.to, this.percent, this.autoVest}) {
     _fillOptionalFields();
@@ -78,6 +79,7 @@ class SetWithdrawVestingRoute implements BaseOperation, Jsonable<List<Object>> {
 
   @override
   List<Object> toJsonableObject() {
+    validate();
     Map<String, Object> params = {
       'from_account': from.toString(),
       'to_account': to.toString(),
@@ -121,7 +123,7 @@ class DelegateVestingShares implements BaseOperation, Jsonable<List<Object>> {
   AccountName delegatee;
   SharesAsset amount;
 
-  static int get ID => 19;
+  static const ID = 19;
 
   DelegateVestingShares({this.delegator, this.delegatee, this.amount});
 
@@ -138,6 +140,7 @@ class DelegateVestingShares implements BaseOperation, Jsonable<List<Object>> {
 
   @override
   List<Object> toJsonableObject() {
+    validate();
     Map<String, Object> params = {
       'delegator': delegator.toString(),
       'delegatee': delegatee.toString(),

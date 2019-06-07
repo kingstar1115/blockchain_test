@@ -7,7 +7,7 @@ import '../types.dart';
 
 class BinaryUtils {
   static final String _OUT_OF_BOUNDS_START_MESS = 'can\'t be less than';
-  static final String _OUT_OF_BOUNDS_MIDDLE_MESS = 'and larger than';
+  static final String _OUT_OF_BOUNDS_MIDDLE_MESS = 'and greater than';
   static final String _OUT_OF_BOUNDS_END_MESS = 'but it equals';
 
   static void _checkOutOfBoundsInt(int val, String type, int min, int max) {

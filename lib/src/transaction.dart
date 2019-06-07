@@ -13,7 +13,7 @@ import 'type/base_type.dart';
 import 'type/time_point_sec.dart';
 import 'utils.dart';
 
-class Transaction extends BaseType {
+class Transaction extends BaseType implements Jsonable<Map<String, Object>> {
   TimePointSec expiration;
   List<BaseType> extensions;
   List<BaseOperation> operations;
@@ -54,6 +54,33 @@ class Transaction extends BaseType {
   void validate() {
     _checkNulls();
     _fillNullOptionalsFields();
+    //_validateAllOperations();
+  }
+
+  @override
+  Map<String, Object> toJsonableObject() {
+    validate();
+    return {
+      'expiration': expiration.toString(),
+      'extensions': JsonSerializer.serializes(extensions),
+      'operations': JsonSerializer.serializes(operations),
+      'ref_block_num': refBlockNum,
+      'ref_block_prefix': refBlockPrefix,
+      'signatures': signatures
+    };
+  }
+
+  ///Converts the transaction to Json string
+  String toJsonString() {
+    Map<String, Object> jsonObj = this.toJsonableObject();
+    String jsonStr = json.encode(jsonObj);
+    return jsonStr;
+  }
+
+  void _validateAllOperations() {
+    operations.forEach((op) {
+      op.validate();
+    });
   }
 
   ///Signs the transaction and adds signatures to [Transaction.signatures] filed.
@@ -77,28 +104,6 @@ class Transaction extends BaseType {
     VIZPrivateKey privateKey = VIZPrivateKey.fromString(wif);
     VIZSignature signature = privateKey.sign(toBytes());
     return signature.toString();
-  }
-
-  ///Converts the transaction to Json format
-  String toJson() {
-    Map<String, Object> jsonMap = {
-      'expiration': expiration.toString(),
-      'extensions': extensions,
-      'operations': operations,
-      'ref_block_num': refBlockNum,
-      'ref_block_prefix': refBlockPrefix,
-      'signatures': signatures
-    };
-
-    String jsonStr = json.encode(jsonMap, toEncodable: (v) {
-      if (v is Jsonable) {
-        return v.toJsonableObject();
-      }
-
-      return v.toString();
-    });
-
-    return jsonStr;
   }
 
   void _checkNulls() {

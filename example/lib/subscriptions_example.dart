@@ -15,13 +15,13 @@ void setPaidSubscriptionExample() {
       amount: VizAsset.fromString('200.000 VIZ'),
       levels: 10,
       period: 30,
-      url: Url('https://example.com'));
+      url: MemoUrl('https://example.com'));
 
   trx.operations.add(setPaidSubscription);
   trx.sign(['<ACTIVE_PRIVATE_KEY>']); //Sign transaction
 
 // And get a json string to broadcast in blockchain
-  print(trx.toJson());
+  print(trx.toJsonString());
 }
 
 void paidSubscriptionExample() {
@@ -39,5 +39,5 @@ void paidSubscriptionExample() {
   trx.sign(['<ACTIVE_PRIVATE_KEY>']); //Sign transaction
 
 // And get a json string to broadcast in blockchain
-  print(trx.toJson());
+  print(trx.toJsonString());
 }

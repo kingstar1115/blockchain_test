@@ -4,7 +4,7 @@ import 'package:buffer/buffer.dart';
 
 import '../exceptions.dart';
 import '../json.dart';
-import '../types.dart' show AccountName, Url, VizAsset;
+import '../types.dart' show AccountName, MemoUrl, VizAsset;
 import '../utils.dart' show BinaryUtils;
 import 'base_operatin.dart';
 
@@ -13,7 +13,7 @@ const PAID_SUBSCRIPTION_MAX_PERIOD = 1000;
 
 class SetPaidSubscription implements BaseOperation, Jsonable<List<Object>> {
   AccountName account;
-  Url url;
+  MemoUrl url;
   VizAsset amount;
 
   /// Origin type uint16
@@ -22,7 +22,7 @@ class SetPaidSubscription implements BaseOperation, Jsonable<List<Object>> {
   /// Origin type uint16
   int period;
 
-  static int get ID => 50;
+  static const ID = 50;
 
   SetPaidSubscription(
       {this.account, this.amount, this.levels, this.period, this.url}) {
@@ -60,7 +60,7 @@ class SetPaidSubscription implements BaseOperation, Jsonable<List<Object>> {
 
   void _fillOptionalField() {
     if (url == null) {
-      url = Url('');
+      url = MemoUrl('');
     }
   }
 
@@ -74,6 +74,7 @@ class SetPaidSubscription implements BaseOperation, Jsonable<List<Object>> {
 
   @override
   List<Object> toJsonableObject() {
+    validate();
     Map<String, Object> params = {
       'account': account.toString(),
       'url': url.toString(),
@@ -102,7 +103,7 @@ class PaidSubscription implements BaseOperation, Jsonable<List<Object>> {
 
   bool autoRenewal;
 
-  static int get ID => 51;
+  static const ID = 51;
 
   PaidSubscription(
       {this.account,
@@ -160,6 +161,7 @@ class PaidSubscription implements BaseOperation, Jsonable<List<Object>> {
 
   @override
   List<Object> toJsonableObject() {
+    validate();
     Map<String, Object> params = {
       'subscriber': subscriber.toString(),
       'account': account.toString(),
