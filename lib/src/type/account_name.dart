@@ -186,4 +186,19 @@ class AccountName extends BaseType {
     }
     return true;
   }
+
+  @override
+  int get hashCode {
+    int result = 17;
+    result = 37 * result + name.hashCode;
+    return result;
+  }
+
+  bool operator ==(dynamic other) {
+    if (other is AccountName) {
+      return name == other.name;
+    }
+
+    return false;
+  }
 }

@@ -3,7 +3,6 @@ import 'package:viz_transaction/viz_transaction.dart';
 
 void main() {
   group('Testing Asset.', () {
-
     test("VizAsset from int", () {
       expect(VizAsset(0).toString(), equals('0.000 VIZ'));
       expect(VizAsset(1).toString(), equals('0.001 VIZ'));

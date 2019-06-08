@@ -1,7 +1,7 @@
 import 'package:viz_transaction/viz_transaction.dart';
 
 void main() {
-  //committeeCreateRequestExample();
+  committeeCreateRequestExample();
   cancelRequestExample();
   voteRequestExample();
 }

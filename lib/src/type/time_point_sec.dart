@@ -39,4 +39,23 @@ class TimePointSec extends BaseType {
   String toString() {
     return _vizTimeStrFormat;
   }
+
+  @override
+  int get hashCode {
+    int result = 17;
+    result = 37 * result + timeSec.hashCode;
+    return result;
+  }
+
+  bool operator >(TimePointSec other) => timeSec > other.timeSec;
+  bool operator <(TimePointSec other) => timeSec < other.timeSec;
+  bool operator >=(TimePointSec other) => timeSec >= other.timeSec;
+  bool operator <=(TimePointSec other) => timeSec <= other.timeSec;
+  bool operator ==(dynamic other) {
+    if (other is TimePointSec) {
+      return timeSec == other.timeSec;
+    }
+
+    return false;
+  }
 }

@@ -166,7 +166,69 @@ void main() {
       CommitteeVoteRequest voteRequest = CommitteeVoteRequest(
           voter: AccountName('alex'), votePercent: -234, requestId: 9678);
 
-      expect(hex.encode(voteRequest.toBytes()), equals('2504616c6578ce25000016ff'));
+      expect(hex.encode(voteRequest.toBytes()),
+          equals('2504616c6578ce25000016ff'));
+    });
+
+    test("Testing EscrowTransfer operation.", () {
+      EscrowTransfer escrowTransfer = EscrowTransfer(
+          initiator: AccountName('bob'),
+          receiver: AccountName('alex'),
+          agent: AccountName('god'),
+          tokenAmount: VizAsset.fromString('1000.000 VIZ'),
+          fee: VizAsset.fromString('67.000 VIZ'),
+          escrowId: 8675,
+          ratificationDeadline:
+              TimePointSec(DateTime.parse('2019-06-08T10:54:21+00:00')),
+          escrowExpiration:
+              TimePointSec(DateTime.parse('2019-06-08T17:54:21+00:00')),
+          jsonMetadata: '{"mess": "Hello Wordl!"}');
+
+      expect(
+          hex.encode(escrowTransfer.toBytes()),
+          equals(
+              '0f03626f6204616c657840420f00000000000356495a00000000e321000003676f64b8050100000000000356495a00000000187b226d657373223a202248656c6c6f20576f72646c21227ddd93fb5c4df6fb5c'));
+    });
+
+    test("Testing EscrowApprove operation.", () {
+      EscrowApprove escrowApprove = EscrowApprove(
+          escrowInitiator: AccountName('bob'),
+          receiver: AccountName('alex'),
+          agent: AccountName('god'),
+          who: AccountName('alex'),
+          escrowId: 9886,
+          approve: true);
+
+      expect(hex.encode(escrowApprove.toBytes()),
+          equals('1203626f6204616c657803676f6404616c65789e26000001'));
+    });
+
+    test("Testing EscrowRelease operation.", () {
+      EscrowRelease escrowRelease = EscrowRelease(
+          escrowInitiator: AccountName('bob'),
+          receiver: AccountName('alex'),
+          agent: AccountName('god'),
+          who: AccountName('god'),
+          escrowId: 78545,
+          tokenAmount: VizAsset.fromString('7856.000 VIZ'),
+          tokensReceiver: AccountName('alex'));
+
+      expect(
+          hex.encode(escrowRelease.toBytes()),
+          equals(
+              '1103626f6204616c657803676f6403676f6404616c6578d132010080df7700000000000356495a00000000'));
+    });
+
+    test("Testing EscrowDispute operation.", () {
+      EscrowDispute escrowDispute = EscrowDispute(
+          escrowId: 777,
+          escrowInitiator: AccountName('bob'),
+          receiver: AccountName('alex'),
+          agent: AccountName('god'),
+          who: AccountName('alex'));
+
+      expect(hex.encode(escrowDispute.toBytes()),
+          equals('1003626f6204616c657803676f6404616c657809030000'));
     });
   });
 }
