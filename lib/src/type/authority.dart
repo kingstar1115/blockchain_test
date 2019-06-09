@@ -29,13 +29,13 @@ class Authority extends BaseType implements Jsonable<Map<String, Object>> {
     ByteDataWriter writer = ByteDataWriter();
     writer.write(BinaryUtils.transformUint32ToBytes(weightThreshold));
 
-    writer.write(BinaryUtils.transformInt64ToVarIntBytes(accountAuths.keys.length));
+    writer.write(BinaryUtils.transformInt64ToVarIntBytes(accountAuths.length));
     for (AccountName account in accountAuths.keys) {
       writer.write(account.toBytes());
       writer.write(BinaryUtils.transformUint16ToBytes(accountAuths[account]));
     }
 
-    writer.write(BinaryUtils.transformInt64ToVarIntBytes(keyAuths.keys.length));
+    writer.write(BinaryUtils.transformInt64ToVarIntBytes(keyAuths.length));
     for (VIZPublicKey key in keyAuths.keys) {
       writer.write(key.toBuffer());
       writer.write(BinaryUtils.transformUint16ToBytes(keyAuths[key]));
