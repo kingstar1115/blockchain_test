@@ -77,12 +77,6 @@ class Transaction extends BaseType implements Jsonable<Map<String, Object>> {
     return jsonStr;
   }
 
-  void _validateAllOperations() {
-    operations.forEach((op) {
-      op.validate();
-    });
-  }
-
   ///Signs the transaction and adds signatures to [Transaction.signatures] filed.
   void sign(List<String> keys) {
     List<String> newSignatures = generateSignatures(keys);

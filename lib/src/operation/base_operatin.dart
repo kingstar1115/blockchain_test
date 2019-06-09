@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:buffer/buffer.dart';
 
 import '../types.dart' show BaseType;
 
