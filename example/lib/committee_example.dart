@@ -50,7 +50,7 @@ void voteRequestExample() {
       voter: AccountName('<ACCOUNT_NAME>'), votePercent: -234, requestId: 9678);
 
   trx.operations.add(voteRequest);
-  trx.sign(['<ACTIVE_PRIVATE_KEY>']); //Sign transaction
+  trx.sign(['<REGULAR_PRIVATE_KEY>']); //Sign transaction
 
 // And get a json string to broadcast in blockchain
   print(trx.toJsonString());

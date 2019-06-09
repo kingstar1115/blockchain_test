@@ -230,5 +230,14 @@ void main() {
       expect(hex.encode(escrowDispute.toBytes()),
           equals('1003626f6204616c657803676f6404616c657809030000'));
     });
+
+    test("Testing EscrowDispute operation.", () {
+      Custom custom = Custom(id: CustomId('test'),
+          requiredRegularAuths: [AccountName('alex')],
+          jsonStr: '{"test_custom": "Hello World"}');
+
+      expect(hex.encode(custom.toBytes()),
+          equals('0a000104616c657804746573741e7b22746573745f637573746f6d223a202248656c6c6f20576f726c64227d'));
+    });
   });
 }
