@@ -62,8 +62,8 @@ class Transaction extends BaseType implements Jsonable<Map<String, Object>> {
     validate();
     return {
       'expiration': expiration.toString(),
-      'extensions': JsonSerializer.serializes(extensions),
-      'operations': JsonSerializer.serializes(operations),
+      'extensions': JsonUtils.serializesToJsonable(extensions),
+      'operations': JsonUtils.serializesToJsonable(operations),
       'ref_block_num': refBlockNum,
       'ref_block_prefix': refBlockPrefix,
       'signatures': signatures

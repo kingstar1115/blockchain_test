@@ -231,13 +231,61 @@ void main() {
           equals('1003626f6204616c657803676f6404616c657809030000'));
     });
 
-    test("Testing EscrowDispute operation.", () {
-      Custom custom = Custom(id: CustomId('test'),
+    test("Testing Custom operation.", () {
+      Custom custom = Custom(
+          id: CustomId('test'),
           requiredRegularAuths: [AccountName('alex')],
           jsonStr: '{"test_custom": "Hello World"}');
 
-      expect(hex.encode(custom.toBytes()),
-          equals('0a000104616c657804746573741e7b22746573745f637573746f6d223a202248656c6c6f20576f726c64227d'));
+      expect(
+          hex.encode(custom.toBytes()),
+          equals(
+              '0a000104616c657804746573741e7b22746573745f637573746f6d223a202248656c6c6f20576f726c64227d'));
+    });
+
+    test("Testing AccountUpdate operation.", () {
+      AccountUpdate accountUpdate = AccountUpdate(
+          account: AccountName('bob'),
+          master: Authority(weightThreshold: 1, keyAuths: {
+            VIZPublicKey.fromString(
+                'VIZ5mBeifuYe9gQKdZPLZ9Ps48i1EGpXBEQSTvBqTJ4PopVUWtyJL'): 1
+          }),
+          regular: Authority(weightThreshold: 1, keyAuths: {
+            VIZPublicKey.fromString(
+                'VIZ5mBeifuYe9gQKdZPLZ9Ps48i1EGpXBEQSTvBqTJ4PopVUWtyJL'): 1
+          }),
+          active: Authority(weightThreshold: 2, accountAuths: {
+            AccountName('alex'): 1,
+            AccountName('jhon'): 1
+          }, keyAuths: {
+            VIZPublicKey.fromString(
+                'VIZ5mBeifuYe9gQKdZPLZ9Ps48i1EGpXBEQSTvBqTJ4PopVUWtyJL'): 2
+          }),
+          memoKey: VIZPublicKey.fromString(
+              'VIZ5mBeifuYe9gQKdZPLZ9Ps48i1EGpXBEQSTvBqTJ4PopVUWtyJL'),
+          jsonMetadata: '{"test": "Hello World"}');
+
+      expect(
+          hex.encode(accountUpdate.toBytes()),
+          equals(
+              '0503626f620101000000000102731bd464c223a71d8b1df5002a1824ff25074a9e6fa300a242a3b6c3a52f85eb010001020000000204616c65780100046a686f6e01000102731bd464c223a71d8b1df5002a1824ff25074a9e6fa300a242a3b6c3a52f85eb02000101000000000102731bd464c223a71d8b1df5002a1824ff25074a9e6fa300a242a3b6c3a52f85eb010002731bd464c223a71d8b1df5002a1824ff25074a9e6fa300a242a3b6c3a52f85eb177b2274657374223a202248656c6c6f20576f726c64227d'));
+    });
+
+    test("Testing AccountUpdate operation only with regular.", () {
+      AccountUpdate accountUpdate = AccountUpdate(
+          account: AccountName('bob'),
+          regular: Authority(weightThreshold: 1, keyAuths: {
+            VIZPublicKey.fromString(
+                'VIZ5mBeifuYe9gQKdZPLZ9Ps48i1EGpXBEQSTvBqTJ4PopVUWtyJL'): 1
+          }),
+          memoKey: VIZPublicKey.fromString(
+              'VIZ5mBeifuYe9gQKdZPLZ9Ps48i1EGpXBEQSTvBqTJ4PopVUWtyJL'),
+          jsonMetadata: '{"test": "Hello World"}');
+
+      expect(
+          hex.encode(accountUpdate.toBytes()),
+          equals(
+              '0503626f6200000101000000000102731bd464c223a71d8b1df5002a1824ff25074a9e6fa300a242a3b6c3a52f85eb010002731bd464c223a71d8b1df5002a1824ff25074a9e6fa300a242a3b6c3a52f85eb177b2274657374223a202248656c6c6f20576f726c64227d'));
     });
   });
 }

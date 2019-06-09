@@ -1,5 +1,6 @@
 export 'type/account_name.dart';
 export 'type/asset.dart';
+export 'type/authority.dart';
 export 'type/base_type.dart';
 export 'type/beneficiary_route_type.dart';
 export 'type/big_num.dart';

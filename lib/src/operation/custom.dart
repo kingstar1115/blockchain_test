@@ -49,11 +49,9 @@ class Custom implements BaseOperation, Jsonable<List<Object>> {
           'requiredRegularAuths or requiredActiveAuths at least must be specified');
     }
 
-    try {
-      json.decode(jsonStr);
-    } on FormatException {
+    if (!JsonUtils.isJson(jsonStr)) {
       throw InvalidParameterException(
-          jsonStr, 'jsonStr', 'The json string invalid');
+          jsonStr, 'jsonStr', 'The json string is invalid');
     }
   }
 
@@ -74,8 +72,8 @@ class Custom implements BaseOperation, Jsonable<List<Object>> {
   List<Object> toJsonableObject() {
     validate();
     Map<String, Object> params = {
-      'required_active_auths': JsonSerializer.serializes(requiredActiveAuths),
-      'required_regular_auths': JsonSerializer.serializes(requiredRegularAuths),
+      'required_active_auths': JsonUtils.serializesToJsonable(requiredActiveAuths),
+      'required_regular_auths': JsonUtils.serializesToJsonable(requiredRegularAuths),
       'id': id.toString(),
       'json': jsonStr
     };

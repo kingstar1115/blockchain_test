@@ -73,6 +73,11 @@ class EscrowTransfer implements BaseOperation, Jsonable<List<Object>> {
           'ratificationDeadline',
           'A ratification deadline cannot be greater than an escrow expiration');
     }
+
+    if (!JsonUtils.isJson(jsonMetadata)) {
+      throw InvalidParameterException(
+          jsonMetadata, 'jsonMetadata', 'The json string is invalid');
+    }
   }
 
   void _fillOptionalField() {
