@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:buffer/buffer.dart';
@@ -72,8 +71,10 @@ class Custom implements BaseOperation, Jsonable<List<Object>> {
   List<Object> toJsonableObject() {
     validate();
     Map<String, Object> params = {
-      'required_active_auths': JsonUtils.serializesToJsonable(requiredActiveAuths),
-      'required_regular_auths': JsonUtils.serializesToJsonable(requiredRegularAuths),
+      'required_active_auths':
+          JsonUtils.serializesToJsonable(requiredActiveAuths),
+      'required_regular_auths':
+          JsonUtils.serializesToJsonable(requiredRegularAuths),
       'id': id.toString(),
       'json': jsonStr
     };

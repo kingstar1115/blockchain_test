@@ -3,7 +3,6 @@ import 'dart:convert';
 import '../json.dart';
 
 class JsonUtils {
-
   static bool isJson(String jsonStr) {
     try {
       json.decode(jsonStr);

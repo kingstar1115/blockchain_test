@@ -18,7 +18,7 @@ class Authority extends BaseType implements Jsonable<Map<String, Object>> {
 
   ///Map<VIZPublicKey, weight:uint16>
   Map<VIZPublicKey, int> keyAuths;
-  
+
   Authority({this.weightThreshold, this.accountAuths, this.keyAuths}) {
     _fillOptionFields();
   }
@@ -88,8 +88,7 @@ class Authority extends BaseType implements Jsonable<Map<String, Object>> {
     };
   }
 
-  void _fillOptionFields(){
-
+  void _fillOptionFields() {
     if (weightThreshold == null) {
       weightThreshold = 0;
     }

@@ -5,9 +5,10 @@ void main() {
   trx.refBlockNum = 46179;
   trx.refBlockPrefix = 1490075988;
 
-  Custom custom = Custom(id: CustomId('test'),
-  requiredRegularAuths: [AccountName('alex')],
-  jsonStr: '{"test_custom": "Hello World"}');
+  Custom custom = Custom(
+      id: CustomId('test'),
+      requiredRegularAuths: [AccountName('alex')],
+      jsonStr: '{"test_custom": "Hello World"}');
   trx.operations.add(custom);
   trx.sign(['<REGULAR_PRIVATE_KEY>']); //Sign transaction
 

@@ -287,5 +287,86 @@ void main() {
           equals(
               '0503626f6200000101000000000102731bd464c223a71d8b1df5002a1824ff25074a9e6fa300a242a3b6c3a52f85eb010002731bd464c223a71d8b1df5002a1824ff25074a9e6fa300a242a3b6c3a52f85eb177b2274657374223a202248656c6c6f20576f726c64227d'));
     });
+
+    test("Testing RequestAccountRecovery operation only with regular.", () {
+      RequestAccountRecovery requestRecovery = RequestAccountRecovery(
+          accountToRecover: AccountName('bob'),
+          recoveryAccount: AccountName('alex'),
+          newMasterAuth: Authority(weightThreshold: 1, keyAuths: {
+            VIZPublicKey.fromString(
+                'VIZ7cjtcWktb6sqv5ehUcDUZre1jwCYWYkC35UYSek7eDVKwyKQSY'): 1
+          }));
+
+      expect(
+          hex.encode(requestRecovery.toBytes()),
+          equals(
+              '0c04616c657803626f62010000000001036753d2bdfa1ad69c48e37997670fe5a8ffbc21c1acdc9aa4ba06ab97455082ba010000'));
+    });
+
+    test("Testing RecoverAccount operation only with regular.", () {
+      RecoverAccount recoverAccount = RecoverAccount(
+          accountToRecover: AccountName('bob'),
+          recentMasterAuth: Authority(weightThreshold: 1, keyAuths: {
+            VIZPublicKey.fromString(
+                'VIZ5mBeifuYe9gQKdZPLZ9Ps48i1EGpXBEQSTvBqTJ4PopVUWtyJL'): 1
+          }),
+          newMasterAuth: Authority(weightThreshold: 1, keyAuths: {
+            VIZPublicKey.fromString(
+                'VIZ7cjtcWktb6sqv5ehUcDUZre1jwCYWYkC35UYSek7eDVKwyKQSY'): 1
+          }));
+
+      expect(
+          hex.encode(recoverAccount.toBytes()),
+          equals(
+              '0d03626f62010000000001036753d2bdfa1ad69c48e37997670fe5a8ffbc21c1acdc9aa4ba06ab97455082ba010001000000000102731bd464c223a71d8b1df5002a1824ff25074a9e6fa300a242a3b6c3a52f85eb010000'));
+    });
+
+    test("Testing ChangeRecoveryAccount operation only with regular.", () {
+      ChangeRecoveryAccount changeRecoveryAccount = ChangeRecoveryAccount(
+          accountToRecover: AccountName('bob'),
+          newRecoveryAccount: AccountName('god'));
+
+      expect(hex.encode(changeRecoveryAccount.toBytes()),
+          equals('0e03626f6203676f6400'));
+    });
+
+    test("Testing AccountMetadata operation only with regular.", () {
+      AccountMetadata accountMetadata = AccountMetadata(
+          account: AccountName('bob'),
+          jsonMetadata: '{"test": "Hello World!"}');
+
+      expect(
+          hex.encode(accountMetadata.toBytes()),
+          equals(
+              '1503626f62187b2274657374223a202248656c6c6f20576f726c6421227d'));
+    });
+
+    test("Testing AccountCreate operation only with regular.", () {
+      AccountCreate accountCreate = AccountCreate(
+          fee: VizAsset.fromString('1.000 VIZ'),
+          delegation: SharesAsset.fromString('10.000000 SHARES'),
+          newAccount: AccountName('bob'),
+          creator: AccountName('alex'),
+          master: Authority(weightThreshold: 1, keyAuths: {
+            VIZPublicKey.fromString(
+                'VIZ7cjtcWktb6sqv5ehUcDUZre1jwCYWYkC35UYSek7eDVKwyKQSY'): 1
+          }),
+          active: Authority(weightThreshold: 1, keyAuths: {
+            VIZPublicKey.fromString(
+                'VIZ7cjtcWktb6sqv5ehUcDUZre1jwCYWYkC35UYSek7eDVKwyKQSY'): 1
+          }),
+          regular: Authority(weightThreshold: 1, keyAuths: {
+            VIZPublicKey.fromString(
+                'VIZ7cjtcWktb6sqv5ehUcDUZre1jwCYWYkC35UYSek7eDVKwyKQSY'): 1
+          }),
+          memoKey: VIZPublicKey.fromString(
+              'VIZ7cjtcWktb6sqv5ehUcDUZre1jwCYWYkC35UYSek7eDVKwyKQSY'),
+          jsonMetadata: '{"test": "HelloWorld"}');
+
+      expect(
+          hex.encode(accountCreate.toBytes()),
+          equals(
+              '14e8030000000000000356495a000000008096980000000000065348415245530004616c657803626f62010000000001036753d2bdfa1ad69c48e37997670fe5a8ffbc21c1acdc9aa4ba06ab97455082ba0100010000000001036753d2bdfa1ad69c48e37997670fe5a8ffbc21c1acdc9aa4ba06ab97455082ba0100010000000001036753d2bdfa1ad69c48e37997670fe5a8ffbc21c1acdc9aa4ba06ab97455082ba0100036753d2bdfa1ad69c48e37997670fe5a8ffbc21c1acdc9aa4ba06ab97455082ba167b2274657374223a202248656c6c6f576f726c64227d04616c657800'));
+    });
   });
 }
