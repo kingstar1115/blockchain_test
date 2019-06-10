@@ -374,9 +374,7 @@ void main() {
           account: AccountName('bob'), proxy: AccountName('alex'));
 
       expect(
-          hex.encode(witnessProxy.toBytes()),
-          equals(
-              '0803626f6204616c6578'));
+          hex.encode(witnessProxy.toBytes()), equals('0803626f6204616c6578'));
     });
 
     test("Testing AccountWitnessVote operation only with regular.", () {
@@ -384,9 +382,7 @@ void main() {
           account: AccountName('alex'), witness: AccountName('god'));
 
       expect(
-          hex.encode(witnessVote.toBytes()),
-          equals(
-              '0704616c657803676f6401'));
+          hex.encode(witnessVote.toBytes()), equals('0704616c657803676f6401'));
     });
 
     test("Testing WitnessUpdate operation only with regular.", () {

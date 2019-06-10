@@ -111,7 +111,7 @@ void accountMetadataExample() {
       account: AccountName('bob'), jsonMetadata: '{"test": "Hello World!"}');
 
   trx.operations.add(accountMetadata);
-  //trx.sign(['<PRIVATE_REGULAR_KEY>']); //Sign transaction
+  trx.sign(['<PRIVATE_REGULAR_KEY>']); //Sign transaction
 
 // And get a json string to broadcast in blockchain
   print(trx.toJsonString());

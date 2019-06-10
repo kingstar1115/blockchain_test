@@ -10,7 +10,6 @@ import '../utils.dart';
 import 'base_operatin.dart';
 
 class WitnessUpdate implements BaseOperation, Jsonable<List<Object>> {
-
   static const ID = 6;
 
   AccountName owner;
@@ -75,7 +74,7 @@ class AccountWitnessVote implements BaseOperation, Jsonable<List<Object>> {
     writer.write(BinaryUtils.transformInt32ToVarIntBytes(ID));
     writer.write(account.toBytes());
     writer.write(witness.toBytes());
-    writer.writeUint8(approve? 1 : 0);
+    writer.writeUint8(approve ? 1 : 0);
     return writer.toBytes();
   }
 
@@ -113,7 +112,6 @@ class AccountWitnessVote implements BaseOperation, Jsonable<List<Object>> {
 }
 
 class AccountWitnessProxy implements BaseOperation, Jsonable<List<Object>> {
-
   static const ID = 8;
 
   AccountName account;
@@ -198,4 +196,3 @@ class AccountWitnessProxy implements BaseOperation, Jsonable<List<Object>> {
 //    return operation;
 //  }
 //}
-
