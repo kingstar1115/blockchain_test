@@ -368,5 +368,38 @@ void main() {
           equals(
               '14e8030000000000000356495a000000008096980000000000065348415245530004616c657803626f62010000000001036753d2bdfa1ad69c48e37997670fe5a8ffbc21c1acdc9aa4ba06ab97455082ba0100010000000001036753d2bdfa1ad69c48e37997670fe5a8ffbc21c1acdc9aa4ba06ab97455082ba0100010000000001036753d2bdfa1ad69c48e37997670fe5a8ffbc21c1acdc9aa4ba06ab97455082ba0100036753d2bdfa1ad69c48e37997670fe5a8ffbc21c1acdc9aa4ba06ab97455082ba167b2274657374223a202248656c6c6f576f726c64227d04616c657800'));
     });
+
+    test("Testing AccountWitnessProxy operation only with regular.", () {
+      AccountWitnessProxy witnessProxy = AccountWitnessProxy(
+          account: AccountName('bob'), proxy: AccountName('alex'));
+
+      expect(
+          hex.encode(witnessProxy.toBytes()),
+          equals(
+              '0803626f6204616c6578'));
+    });
+
+    test("Testing AccountWitnessVote operation only with regular.", () {
+      AccountWitnessVote witnessVote = AccountWitnessVote(
+          account: AccountName('alex'), witness: AccountName('god'));
+
+      expect(
+          hex.encode(witnessVote.toBytes()),
+          equals(
+              '0704616c657803676f6401'));
+    });
+
+    test("Testing WitnessUpdate operation only with regular.", () {
+      WitnessUpdate witnessUpdate = WitnessUpdate(
+          owner: AccountName('bob'),
+          url: MemoUrl('https://example.com'),
+          key: VIZPublicKey.fromString(
+              'VIZ7cjtcWktb6sqv5ehUcDUZre1jwCYWYkC35UYSek7eDVKwyKQSY'));
+
+      expect(
+          hex.encode(witnessUpdate.toBytes()),
+          equals(
+              '0603626f621368747470733a2f2f6578616d706c652e636f6d036753d2bdfa1ad69c48e37997670fe5a8ffbc21c1acdc9aa4ba06ab97455082ba'));
+    });
   });
 }
