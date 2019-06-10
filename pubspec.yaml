@@ -11,7 +11,7 @@ environment:
 dependencies:
   convert: ^2.1.1
   buffer: ^1.0.6
-  viz_dart_ecc: ^1.0.0
+  viz_dart_ecc: ^1.0.1
 
 dev_dependencies:
   pedantic: ^1.0.0
