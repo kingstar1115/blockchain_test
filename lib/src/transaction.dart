@@ -13,7 +13,7 @@ import 'type/base_type.dart';
 import 'type/time_point_sec.dart';
 import 'utils.dart';
 
-class Transaction extends BaseType {
+class Transaction extends BaseType implements Jsonable<Map<String, Object>> {
   TimePointSec expiration;
   List<BaseType> extensions;
   List<BaseOperation> operations;
@@ -28,10 +28,6 @@ class Transaction extends BaseType {
       this.refBlockPrefix,
       this.extensions,
       this.signatures}) {
-    _fillNullOptionalsFields();
-  }
-
-  Transaction.empty() {
     _fillNullOptionalsFields();
   }
 
@@ -58,6 +54,27 @@ class Transaction extends BaseType {
   void validate() {
     _checkNulls();
     _fillNullOptionalsFields();
+    //_validateAllOperations();
+  }
+
+  @override
+  Map<String, Object> toJsonableObject() {
+    validate();
+    return {
+      'expiration': expiration.toString(),
+      'extensions': JsonUtils.serializesToJsonable(extensions),
+      'operations': JsonUtils.serializesToJsonable(operations),
+      'ref_block_num': refBlockNum,
+      'ref_block_prefix': refBlockPrefix,
+      'signatures': signatures
+    };
+  }
+
+  ///Converts the transaction to Json string
+  String toJsonString() {
+    Map<String, Object> jsonObj = this.toJsonableObject();
+    String jsonStr = json.encode(jsonObj);
+    return jsonStr;
   }
 
   ///Signs the transaction and adds signatures to [Transaction.signatures] filed.
@@ -83,28 +100,6 @@ class Transaction extends BaseType {
     return signature.toString();
   }
 
-  ///Converts the transaction to Json format
-  String toJson() {
-    Map<String, Object> jsonMap = {
-      'expiration': expiration.toString(),
-      'extensions': extensions,
-      'operations': operations,
-      'ref_block_num': refBlockNum,
-      'ref_block_prefix': refBlockPrefix,
-      'signatures': signatures
-    };
-
-    String jsonStr = json.encode(jsonMap, toEncodable: (v) {
-      if (v is Jsonable) {
-        return v.toJsonableObject();
-      }
-
-      return v.toString();
-    });
-
-    return jsonStr;
-  }
-
   void _checkNulls() {
     InvalidParameterException.checkNotNull(operations, 'operations');
     InvalidParameterException.checkNotNull(refBlockNum, 'ref_block_num');
@@ -113,9 +108,7 @@ class Transaction extends BaseType {
 
   void _fillNullOptionalsFields() {
     if (expiration == null) {
-      int oneHour = 1 * 60 * 60 * 1000;
-      int exp = DateTime.now().millisecondsSinceEpoch + oneHour;
-      expiration = TimePointSec(DateTime.fromMillisecondsSinceEpoch(exp));
+      expiration = TimePointSec(DateTime.now().add(Duration(minutes: 30)));
     }
 
     if (operations == null) {

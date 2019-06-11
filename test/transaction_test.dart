@@ -6,7 +6,7 @@ void main() {
   Transaction trx;
 
   setUp(() {
-    trx = Transaction.empty();
+    trx = Transaction();
     trx.expiration = TimePointSec(DateTime.parse('2019-05-29T14:37:02+00:00'));
     trx.refBlockNum = 40593;
     trx.refBlockPrefix = 2545120202;

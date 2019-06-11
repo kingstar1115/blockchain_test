@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import '../exceptions.dart';
-import '../utils.dart';
+import '../utils.dart' show BinaryUtils;
 import 'base_type.dart';
 
 class AccountName extends BaseType {
@@ -185,5 +185,20 @@ class AccountName extends BaseType {
       begin = end + 1;
     }
     return true;
+  }
+
+  @override
+  int get hashCode {
+    int result = 17;
+    result = 37 * result + name.hashCode;
+    return result;
+  }
+
+  bool operator ==(dynamic other) {
+    if (other is AccountName) {
+      return name == other.name;
+    }
+
+    return false;
   }
 }
