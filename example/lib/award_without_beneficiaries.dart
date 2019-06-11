@@ -1,22 +1,16 @@
 import 'package:viz_transaction/viz_transaction.dart';
 
 void main() {
-  Transaction trx = Transaction(
-      expiration: TimePointSec(DateTime.now().add(Duration(minutes: 30))),
-      refBlockNum: 46179,
-      refBlockPrefix: 1490075988); // now time + 30min
+  Transaction trx = Transaction(refBlockNum: 46179, refBlockPrefix: 1490075988);
 
   Award award = Award(
-      initiator: AccountName('<INITIATOR_LOGIN>'), //<INITIATOR_LOGIN>
-      receiver: AccountName('<RECEIVER_LOGIN>'), //<RECEIVER_LOGIN>
+      initiator: AccountName('<INITIATOR_LOGIN>'),
+      receiver: AccountName('<RECEIVER_LOGIN>'),
       energy: 1000, // 10.00%
-      customSequence:
-          Uint64(BigInt.from(1234)), // Just any number, usually zero
-      memo: Memo('Hello World'),
-      beneficiaries: []);
+      memo: Memo('Hello World'));
 
   trx.operations.add(award);
   trx.sign(['<REGULAR_PRIVATE_KEY>']); //Sign transaction
 
-  print(trx.toJson()); // And get a json string to broadcast in blockchain
+  print(trx.toJsonString()); // And get a json string to broadcast in blockchain
 }

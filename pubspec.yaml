@@ -1,16 +1,17 @@
 name: viz_transaction
-description: Build and sign(multi-sign) transactions for VIZ blockchain.
+description: "Using this library you can easily create and sign transactions for VIZ blockchain.
+It also allows you to multi-sign existing transactions or create them without signature at all."
 version: 1.0.0
 homepage: https://github.com/VizTower/viz-transaction
 author: Ivan Zarubin <ivanzar.developer@gmial.com>
 
 environment:
-  sdk: '>=2.2.0 <3.0.0'
+  sdk: '>=2.3.1 <3.0.0'
 
 dependencies:
   convert: ^2.1.1
   buffer: ^1.0.6
-  viz_dart_ecc: ^1.0.0
+  viz_dart_ecc: ^1.0.1
 
 dev_dependencies:
   pedantic: ^1.0.0

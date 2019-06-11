@@ -1,33 +1,33 @@
 import 'dart:typed_data';
 
 import '../exceptions.dart';
-import '../utils.dart';
+import '../utils.dart' show BinaryUtils;
 import 'base_type.dart';
 
-class Memo extends BaseType {
-  String _memo;
+class Url extends BaseType {
+  String _url;
 
-  Memo(String memo) {
-    this.memo = memo;
+  Url(String url) {
+    this.url = url;
     validate();
   }
 
-  set memo(String str) {
+  set url(String str) {
     _validate(str);
-    _memo = str;
+    _url = str;
   }
 
-  String get memo => _memo;
+  String get url => _url;
 
   @override
   Uint8List toBytes() {
     validate();
-    return BinaryUtils.transformStringToVarIntBytes(memo);
+    return BinaryUtils.transformStringToVarIntBytes(url);
   }
 
   @override
   void validate() {
-    _validate(memo);
+    _validate(url);
   }
 
   void _validate(String memo) {
@@ -35,13 +35,13 @@ class Memo extends BaseType {
 
     if (memo.length > 1024) {
       throw InvalidParameterException(
-          memo.length,
-          'memo.length',
-          'The memo is too long. '
+          url.length,
+          'urls.length',
+          'The url is too long. '
               'Only 1024 characters are allowed.');
     }
   }
 
   @override
-  String toString() => memo;
+  String toString() => url;
 }
