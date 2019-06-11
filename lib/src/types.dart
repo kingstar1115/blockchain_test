@@ -4,6 +4,7 @@ export 'type/authority.dart';
 export 'type/base_type.dart';
 export 'type/beneficiary_route_type.dart';
 export 'type/big_num.dart';
+export 'type/chain_properties.dart';
 export 'type/limited_strings.dart';
 export 'type/time_point_sec.dart';
 export 'type/uint64.dart';
