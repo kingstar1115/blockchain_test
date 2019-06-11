@@ -5,7 +5,7 @@ import 'package:buffer/buffer.dart';
 import '../exceptions.dart';
 import '../json.dart';
 import '../types.dart' show AccountName, Uint64, Memo, BeneficiaryRouteType;
-import '../utils.dart';
+import '../utils.dart' show BinaryUtils;
 import 'base_operatin.dart';
 
 class Award implements BaseOperation, Jsonable<List<Object>> {
@@ -18,7 +18,7 @@ class Award implements BaseOperation, Jsonable<List<Object>> {
   Memo memo;
   List<BeneficiaryRouteType> beneficiaries;
 
-  static int get ID => 47;
+  static const ID = 47;
 
   Award(
       {this.initiator,
@@ -27,10 +27,6 @@ class Award implements BaseOperation, Jsonable<List<Object>> {
       this.customSequence,
       this.memo,
       this.beneficiaries}) {
-    _fillNullOptionalsFields();
-  }
-
-  Award.empty() {
     _fillNullOptionalsFields();
   }
 
@@ -98,14 +94,11 @@ class Award implements BaseOperation, Jsonable<List<Object>> {
     if (beneficiaries == null) {
       beneficiaries = [];
     }
-
-    if (beneficiaries == null) {
-      beneficiaries = [];
-    }
   }
 
   @override
   List<Object> toJsonableObject() {
+    validate();
     List<Object> beneficiaries = [];
 
     for (BeneficiaryRouteType beneficiary in this.beneficiaries) {

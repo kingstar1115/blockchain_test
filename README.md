@@ -13,32 +13,54 @@ It also allows you to multi-sign existing transactions or create them without si
 **NOTE:** You cannot broadcast transactions to the blockchain using this library. Only serialization and signing.
 To send transactions to the network, use any other http/ws-library
 
-## Example transaction
+## Example transfer
 
-Creates and signs a transaction with an ``award`` operation and without beneficiaries.
+Signing ``transfer`` operations with viz-transaction is very simple:
+
+```dart
+import 'package:viz_transaction/viz_transaction.dart';
+
+void main() {
+  Transaction trx = Transaction();
+  trx.refBlockNum = 46179;
+  trx.refBlockPrefix = 1490075988;
+
+  Transfer transfer = Transfer(
+      from: AccountName('<SENDER_LOGIN>'),
+      to: AccountName('<RECEIVER_LOGIN>'),
+      amount: VizAsset.fromString('1.000 VIZ'),
+      memo: Memo('Hello world!'));
+
+  trx.operations.add(transfer);
+  trx.sign(['<ACTIVE_PRIVATE_KEY>']); //Sign transaction
+
+  // And get a json string to broadcast in blockchain
+  print(trx.toJsonString());
+}
+```
+
+## Example award
+
+What about creating and signing a transaction with an ``award`` operation? Let's do it without beneficiaries.
 
 ```dart
 import 'package:viz_transaction/viz_transaction.dart';
 
 void main() {
   Transaction trx = Transaction(
-      expiration: TimePointSec(DateTime.now().add(Duration(minutes: 30))),
       refBlockNum: 46179,
-      refBlockPrefix: 1490075988); // now time + 30min
+      refBlockPrefix: 1490075988);
 
   Award award = Award(
-      initiator: AccountName('<INITIATOR_LOGIN>'), //<INITIATOR_LOGIN>
-      receiver: AccountName('<RECEIVER_LOGIN>'), //<RECEIVER_LOGIN>
+      initiator: AccountName('<INITIATOR_LOGIN>'),
+      receiver: AccountName('<RECEIVER_LOGIN>'),
       energy: 1000, // 10.00%
-      customSequence:
-          Uint64(BigInt.from(1234)), // Just any number, usually zero
-      memo: Memo('Hello World'),
-      beneficiaries: []);
+      memo: Memo('Hello World'));
 
   trx.operations.add(award);
   trx.sign(['<REGULAR_PRIVATE_KEY>']); //Sign transaction
 
-  print(trx.toJson()); // And get a json string to broadcast in blockchain
+  print(trx.toJsonString()); // And get a json string to broadcast in blockchain
 }
 ```
 
@@ -48,18 +70,14 @@ And now let's do the same but with two beneficiaries.
 import 'package:viz_transaction/viz_transaction.dart';
 
 void main() {
-  Transaction trx = Transaction.empty();
-  trx.expiration = TimePointSec(
-      DateTime.now().add(Duration(minutes: 30))); // now time + 30min
+  Transaction trx = Transaction();
   trx.refBlockNum = 46179;
   trx.refBlockPrefix = 1490075988;
 
-  Award award = Award.empty();
+  Award award = Award();
   award.initiator = AccountName('<INITIATOR_LOGIN>');
   award.receiver = AccountName('<RECEIVER_LOGIN>');
   award.energy = 1000; // 10.00%
-  award.customSequence =
-      Uint64(BigInt.from(1234)); // Just any number, usually zero
   award.memo = Memo('Hello World');
   award.beneficiaries = [
     BeneficiaryRouteType(AccountName('<BENEFICIARY_ONE>'),
@@ -72,11 +90,11 @@ void main() {
   trx.sign(['<REGULAR_PRIVATE_KEY>']); //Sign transaction
 
   // And get a json string to broadcast in blockchain
-  print(trx.toJson());
+  print(trx.toJsonString());
 }
 ```
 
-As you can see, an empty constructor was used for "award" operation, and then values were set. Just because it is possible.
+As you may have noticed, an empty constructor was used for "award" operation, and then values were set. Just because it is possible.
 
 ## Example gets ref block num and prefix
 

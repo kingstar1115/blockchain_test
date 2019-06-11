@@ -1,0 +1,14 @@
+import 'type/asset.dart';
+
+const COMMITTEE_MIN_DURATION = 5;
+const COMMITTEE_MAX_DURATION = 30;
+
+/// A half of initial initial supply(50 000 000.000 VIZ / 2 = 25 000 000.000 VIZ)
+const int COMMITTEE_MAX_REQUIRED_AMOUNT = 25000000000;
+
+final CHAIN_MIN_ACCOUNT_CREATION_FEE = VizAsset.fromString('1.000 VIZ');
+final CHAIN_MIN_BLOCK_SIZE_LIMIT = 1024 * 64;
+final CHAIN_MAX_BLOCK_SIZE_LIMIT = 2 * 1024 * 1024;
+final CHAIN_MIN_DELEGATION_TIME = Duration(days: 5);
+final CHAIN_BLOCK_INTERVAL = 3;
+final CHAIN_BLOCKS_PER_YEAR = 365 * 24 * 60 * 60 ~/ CHAIN_BLOCK_INTERVAL;

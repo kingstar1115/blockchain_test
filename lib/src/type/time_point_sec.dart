@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import '../types.dart' show BaseType;
-import '../utils.dart';
+import 'base_type.dart';
+import '../utils.dart' show BinaryUtils;
 
 class TimePointSec extends BaseType {
   int _dateSec;
@@ -38,5 +38,24 @@ class TimePointSec extends BaseType {
   @override
   String toString() {
     return _vizTimeStrFormat;
+  }
+
+  @override
+  int get hashCode {
+    int result = 17;
+    result = 37 * result + timeSec.hashCode;
+    return result;
+  }
+
+  bool operator >(TimePointSec other) => timeSec > other.timeSec;
+  bool operator <(TimePointSec other) => timeSec < other.timeSec;
+  bool operator >=(TimePointSec other) => timeSec >= other.timeSec;
+  bool operator <=(TimePointSec other) => timeSec <= other.timeSec;
+  bool operator ==(dynamic other) {
+    if (other is TimePointSec) {
+      return timeSec == other.timeSec;
+    }
+
+    return false;
   }
 }
