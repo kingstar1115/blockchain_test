@@ -1,7 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:meta/meta.dart';
-
 import '../exceptions.dart';
 import '../utils.dart' show BinaryUtils;
 import 'base_type.dart';
@@ -15,7 +13,6 @@ abstract class LimitedString extends BaseType {
     validate();
   }
 
-  @protected
   String get strName;
 
   @override
