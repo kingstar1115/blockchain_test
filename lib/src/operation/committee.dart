@@ -2,17 +2,12 @@ import 'dart:typed_data';
 
 import 'package:buffer/buffer.dart';
 
+import '../chain_conf.dart';
 import '../exceptions.dart';
 import '../json.dart';
 import '../operations.dart';
 import '../types.dart';
 import '../utils.dart';
-
-const COMMITTEE_MIN_DURATION = 5;
-const COMMITTEE_MAX_DURATION = 30;
-
-/// A half of initial initial supply(50 000 000.000 VIZ / 2 = 25 000 000.000 VIZ)
-const int COMMITTEE_MAX_REQUIRED_AMOUNT = 25000000000;
 
 class CommitteeWorkerCreateRequest
     implements BaseOperation, Jsonable<List<Object>> {

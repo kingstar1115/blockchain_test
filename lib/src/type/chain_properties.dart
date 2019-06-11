@@ -354,7 +354,8 @@ class ChainPropertiesHf6 extends ChainPropertiesHf4 {
     params['data_operations_cost_additional_bandwidth'] =
         dataOperationsCostAdditionalBandwidth;
     params['witness_miss_penalty_percent'] = witnessMissPenaltyPercent;
-    params['witness_miss_penalty_duration'] = witnessMissPenaltyDuration.inSeconds;
+    params['witness_miss_penalty_duration'] =
+        witnessMissPenaltyDuration.inSeconds;
 
     return params;
   }

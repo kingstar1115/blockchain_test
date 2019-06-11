@@ -397,5 +397,34 @@ void main() {
           equals(
               '0603626f621368747470733a2f2f6578616d706c652e636f6d036753d2bdfa1ad69c48e37997670fe5a8ffbc21c1acdc9aa4ba06ab97455082ba'));
     });
+
+    test("Testing ChainPropertiesHf6 operation only with regular.", () {
+      ChainPropertiesHf6 propertiesHf6 = ChainPropertiesHf6();
+      propertiesHf6.witnessMissPenaltyDuration = Duration(seconds: 50);
+      propertiesHf6.witnessMissPenaltyPercent = 1; //0.01%
+      propertiesHf6.dataOperationsCostAdditionalBandwidth = 100;
+      propertiesHf6.inflationRecalcPeriod = 120;
+      propertiesHf6.inflationRatioCommitteeVsRewardFund = 5000;
+      propertiesHf6.inflationWitnessPercent = 2000;
+      propertiesHf6.bandwidthReserveBelow = SharesAsset(0);
+      propertiesHf6.bandwidthReservePercent = 124;
+      propertiesHf6.committeeRequestApproveMinPercent = 1000;
+      propertiesHf6.createAccountDelegationRatio = 10;
+      propertiesHf6.createAccountDelegationTime = Duration(days: 30);
+      propertiesHf6.maximumBlockSize = CHAIN_MIN_BLOCK_SIZE_LIMIT + 1024;
+      propertiesHf6.minDelegation = CHAIN_MIN_ACCOUNT_CREATION_FEE;
+      propertiesHf6.voteAccountingMinRshares =
+          SharesAsset.fromString('1.000000 SHARES');
+      propertiesHf6.accountCreationFee = CHAIN_MIN_ACCOUNT_CREATION_FEE;
+
+      VersionedChainPropertiesUpdate propertiesUpdate =
+          VersionedChainPropertiesUpdate(
+              owner: AccountName('bob'), props: propertiesHf6);
+
+      expect(
+          hex.encode(propertiesUpdate.toBytes()),
+          equals(
+              '2e03626f6202e8030000000000000356495a00000000000401000a000000008d2700e8030000000000000356495a00000000000000007c0000000000000000000653484152455300000040420f00e803d00788137800000064000000010032000000'));
+    });
   });
 }

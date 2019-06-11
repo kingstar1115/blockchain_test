@@ -154,8 +154,8 @@ class AccountWitnessProxy implements BaseOperation, Jsonable<List<Object>> {
   }
 }
 
-class VersionedChainPropertiesUpdate implements BaseOperation, Jsonable<List<Object>> {
-
+class VersionedChainPropertiesUpdate
+    implements BaseOperation, Jsonable<List<Object>> {
   static const ID = 46;
 
   AccountName owner;
@@ -177,7 +177,6 @@ class VersionedChainPropertiesUpdate implements BaseOperation, Jsonable<List<Obj
   void validate() {
     _checkNulls();
   }
-
 
   void _checkNulls() {
     InvalidParameterException.checkNotNull(owner, 'owner');
