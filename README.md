@@ -1,5 +1,7 @@
 # viz-transaction
 
+![Logo](https://raw.githubusercontent.com/Ivanzar/viz-transaction/master/img/viz-transaction%20logo.png)
+
 ![GitHub](https://img.shields.io/github/license/VizTower/viz-transaction.svg)
 [![Build Status](https://travis-ci.com/VizTower/viz-transaction.svg?branch=master)](https://travis-ci.com/VizTower/viz-transaction)
 ![Pub](https://img.shields.io/pub/v/viz_transaction.svg)
